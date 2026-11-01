@@ -1,15 +1,34 @@
 # PromptLab AI 2.0
 
-PromptLab AI is a prompt-engineering workspace built with a vanilla JavaScript frontend and a FastAPI backend. Version 2.0 begins adding a persistent prompt library with version history.
+**An AI-powered prompt engineering workspace built with FastAPI, Google Gemini, and vanilla JavaScript.**
 
-## Current features
+PromptLab AI 2.0 helps users create, improve, explain, optimize, and evaluate AI prompts through a clean developer-focused interface. It also includes a persistent prompt library with SQLite-based version history.
 
-- Generate, improve, explain, and optimize prompts using the Gemini API.
-- FastAPI backend with request IDs and health endpoint.
-- SQLite-backed prompt library: save named prompts and automatically create numbered versions.
-- Browse saved prompts and retrieve their version history through the API.
+## Features
 
-## Project structure
+- **Prompt Generation:** Generate AI prompts from user instructions.
+- **Prompt Improvement:** Refine prompts for better clarity, structure, and results.
+- **Prompt Explanation:** Understand the purpose and structure of a prompt.
+- **Prompt Optimization:** Optimize prompts for more effective AI interactions.
+- **Prompt Evaluation:** Evaluate prompts across clarity, specificity, context, and structure, with scores and improvement suggestions.
+- **Prompt Library:** Save and manage named prompts.
+- **Version History:** Automatically create numbered versions when saving prompts under the same name.
+- **Persistent Storage:** Store prompts locally using SQLite.
+- **REST API:** FastAPI endpoints with request IDs and health monitoring.
+
+## Technology Stack
+
+| Component | Technology |
+|---|---|
+| Frontend | HTML, CSS, JavaScript |
+| Backend | Python, FastAPI |
+| AI Integration | Google Gemini API |
+| Database | SQLite |
+| Data Validation | Pydantic |
+| API Documentation | Swagger UI |
+| Testing | Pytest |
+
+## Project Structure
 
 ```text
 PromptLab-AI-2.0/
@@ -23,104 +42,143 @@ PromptLab-AI-2.0/
 │   ├── .env.example
 │   └── requirements.txt
 ├── frontend/
+│   ├── index.html
+│   ├── script.js
+│   └── style.css
 ├── .gitignore
+├── check_models.py
 └── README.md
 ```
 
-## Local setup (Windows PowerShell)
+## Getting Started
 
-1. Open a terminal in the `backend` folder.
-2. Create and activate a virtual environment:
+### Prerequisites
 
-```powershell
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
+- Python 3.10 or later (use a version supported by the project dependencies).
+- A Google Gemini API key for AI-powered features.
+- VS Code with the Live Server extension.
+
+### 1. Clone the repository
+
+```bash
+git clone YOUR_GITHUB_REPOSITORY_URL
+cd PromptLab-AI-2.0
 ```
 
-3. Install dependencies:
+### 2. Set up the backend
 
 ```powershell
+cd backend
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
 ```
 
-4. Create your local environment file:
+### 3. Configure environment variables
 
 ```powershell
 Copy-Item .env.example .env
 ```
 
-5. Open `backend/.env` and add your own Gemini API key to `GEMINI_API_KEY`.
-6. Start the API:
+Open `backend/.env` and add your Gemini API key:
+
+```env
+GEMINI_API_KEY=your_api_key_here
+```
+
+Never commit your actual `.env` file or API key.
+
+### 4. Start the backend
+
+From the `backend` directory:
 
 ```powershell
 uvicorn app.main:app --reload
 ```
 
-API documentation: http://127.0.0.1:8000/docs
+Backend API:
 
-Open the frontend using the VS Code Live Server extension (typically http://127.0.0.1:5500). The frontend currently calls the local API at http://127.0.0.1:8000/api/v1.
+`http://127.0.0.1:8000`
 
-## Prompt versioning API
+Interactive API documentation:
 
-Save a prompt. Repeating the same name creates the next version:
+`http://127.0.0.1:8000/docs`
 
-```http
-POST /api/v1/prompts
-Content-Type: application/json
+### 5. Start the frontend
 
-{"name":"Interview helper","content":"Act as a technical interviewer."}
+Open `frontend/index.html` using VS Code Live Server.
+
+The frontend typically runs at:
+
+`http://127.0.0.1:5500`
+
+The frontend connects to the local backend at:
+
+`http://127.0.0.1:8000/api/v1`
+
+## Prompt Library API
+
+The prompt library supports persistent storage and version history.
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| POST | `/api/v1/prompts` | Save a prompt or create a new version |
+| GET | `/api/v1/prompts` | Retrieve saved prompts |
+| GET | `/api/v1/prompts/{prompt_id}/versions` | Retrieve prompt version history |
+
+Example request:
+
+```json
+{
+  "name": "Interview Assistant",
+  "content": "Act as a technical interviewer."
+}
 ```
 
-List saved prompts:
+Saving another prompt with the same name creates the next numbered version.
 
-```http
-GET /api/v1/prompts
-```
+## Testing
 
-List versions of a prompt:
-
-```http
-GET /api/v1/prompts/1/versions
-```
-
-Interactive docs at `/docs` let you try these endpoints without writing frontend code first.
-
-## Tests
-
-From the `backend` folder:
+From the `backend` directory:
 
 ```powershell
 python -m pytest
 ```
 
+Check installed dependencies:
+
+```powershell
+python -m pip check
+```
+
+## Database
+
+The application uses SQLite for local prompt storage.
+
+Default database location:
+
+`backend/data/promptlab.db`
+
+The database persists saved prompts and their version history across backend restarts.
+
+The prompt library does not require a Gemini API call.
+
 ## Security
 
-- Never commit `.env`, API keys, or credentials.
-- `.env.example` contains placeholders only.
-- The database is local and ignored by Git.
-- If an API key has ever been committed or shared in an archive, revoke it and create a new one.
+- API keys are stored in local environment variables.
+- `.env` files are excluded through `.gitignore`.
+- `.env.example` contains configuration placeholders only.
+- Local database files and virtual environments are excluded from Git.
+- Never expose or commit API credentials.
 
 ## Cost
 
-The application code, SQLite database, FastAPI, and local development workflow are free. Gemini API free-tier availability and quotas are controlled by Google and can change. A paid API key is not required to test the prompt-library endpoints.
+The application and its local development stack use free, open-source technologies. Gemini API usage is subject to Google's current free-tier quotas, availability, and pricing.
 
-## Version 2.0 — first milestone
+## Project Status
 
-The first 2.0 milestone adds a persistent prompt library:
+**Version 2.0 — Core features implemented.**
 
-- Save the prompt currently in the editor under a name.
-- Saving the same name creates a new numbered version.
-- Browse saved prompts after restarting the browser or backend.
-- Load the latest saved version back into the editor.
+The current milestone includes AI-powered prompt operations, prompt evaluation, persistent prompt storage, and automatic version history.
 
-The library is stored in a local SQLite database at `backend/data/promptlab.db` by default. It does not require an LLM API call, so this feature can be tested without spending money or configuring a Gemini key.
-
-### Test the prompt library
-
-Start the backend, open `http://127.0.0.1:8000/docs`, and try:
-
-- `POST /api/v1/prompts` with `{"name":"Research assistant","content":"Act as a careful research assistant."}`
-- `GET /api/v1/prompts`
-- `GET /api/v1/prompts/1/versions`
-
-In the frontend, enter a prompt, give it a name under **Prompt library**, and select **Save prompt**. Save it again with the same name to create version 2.
+Future development can include prompt comparison, expanded automated testing, and additional evaluation capabilities.

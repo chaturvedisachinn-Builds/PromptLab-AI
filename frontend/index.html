@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PromptLab AI prompt engineering workspace.">
+  <title>PromptLab AI — Prompt Engineering Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header"><nav class="nav container" aria-label="Primary navigation"><a class="brand" href="#console"><span>PL</span> PromptLab AI</a><button class="menu-button" id="menuButton" aria-expanded="false" aria-controls="navLinks">Menu</button><div class="nav-links" id="navLinks"><a href="#features">Features</a><a href="#templates">Templates</a><a href="#about">About</a></div><a class="button button-outline" href="#console">Try it free</a></nav></header>
+  <main>
+    <section class="hero container" id="console"><p class="eyebrow">● AI-powered prompt engineering studio</p><h1>Build better <span>AI prompts</span> in seconds.</h1><p class="hero-copy">Generate, refine, optimize, and understand prompts with a focused workspace connected to your AI backend.</p>
+      <section class="console" id="consoleWrap" aria-label="Prompt workspace"><div class="console-bar"><i></i><i></i><i></i><span>prompt.txt</span></div><label class="sr-only" for="promptInput">Your prompt</label><textarea id="promptInput" maxlength="10000" placeholder="Describe what you want to create…"></textarea><div class="console-actions"><div class="action-set"><button class="button button-primary" data-action="generate">Generate</button><button class="button" data-action="improve">Improve</button><button class="button" data-action="explain">Explain</button><button class="button" data-action="optimize">Optimize</button><button class="button" data-action="evaluate">Evaluate</button></div><span id="charCount" class="char-count">0 / 10,000</span></div></section>
+      <section class="output-panel" id="outputPanel" aria-live="polite"><div class="output-head"><div><span class="output-tag" id="outputTag">Output</span><span class="status" id="outputStatus"></span></div><div class="output-tools"><button class="text-button" id="retryButton" disabled>Retry</button><button class="text-button" id="clearButton" disabled>Clear</button><button class="text-button" id="copyMarkdownButton" disabled>Copy Markdown</button><button class="text-button" id="copyOutput" disabled>Copy</button></div></div><div class="loading hidden" id="outputLoading"><span class="spinner"></span><span id="loadingText">Connecting…</span></div><article id="outputText" class="markdown-output"></article><div id="evaluationReport" class="evaluation-report hidden"></div><dl class="metadata" id="metadata" hidden><div><dt>Model</dt><dd id="modelInfo">—</dd></div><div><dt>Request ID</dt><dd id="requestInfo">—</dd></div><div><dt>Action</dt><dd id="actionInfo">—</dd></div><div><dt>Response time</dt><dd id="timeInfo">—</dd></div></dl><div class="exports"><button class="text-button" id="downloadTxt" disabled>Download TXT</button><button class="text-button" id="downloadMd" disabled>Download Markdown</button><button class="text-button" id="downloadPdf" disabled>Print / Save PDF</button></div></section>
+    </section>
+    <section class="section container" id="history">
+      <div class="section-heading"><p class="eyebrow">Your workspace</p><h2>Prompt library</h2><p>Save named prompts, keep numbered versions, and reuse them across sessions.</p></div>
+      <div class="library-save">
+        <label for="promptName">Save the current prompt</label>
+        <div class="library-save-row"><input id="promptName" type="text" maxlength="100" placeholder="e.g. Product research assistant"><button class="button button-primary" id="savePromptButton" type="button">Save prompt</button></div>
+        <p class="library-message" id="libraryMessage" role="status">Your saved prompts are stored locally in the backend SQLite database.</p>
+      </div>
+      <div class="library-list" id="historyList"><p class="empty-state">Loading your saved prompts…</p></div>
+    </section>
+    <section class="section muted" id="features"><div class="container"><div class="section-heading"><p class="eyebrow">Built for clear thinking</p><h2>Four focused tools, one reliable workflow.</h2></div><div class="card-grid"><article><h3>Generate</h3><p>Turn a brief idea into a structured, model-ready prompt.</p></article><article><h3>Improve</h3><p>Make an existing draft clearer, sharper, and more specific.</p></article><article><h3>Explain</h3><p>Understand prompt structure, context, and likely model behavior.</p></article><article><h3>Optimize</h3><p>Restructure prompts using practical prompting principles.</p></article></div></div></section>
+    <section class="section container" id="templates"><div class="section-heading"><p class="eyebrow">Starting points</p><h2>Prompt templates</h2></div><div class="card-grid templates"><button data-template="Help me create a research plan for [topic], including objectives, sources, methodology, and a timeline.">Academic research</button><button data-template="Help me debug this code. Explain the issue, provide a corrected version, and describe the fix: [paste code].">Code review</button><button data-template="Create a marketing campaign for [product] targeting [audience]. Include messaging, channels, and success metrics.">Marketing campaign</button><button data-template="Draft a professional email to [recipient] about [topic]. Use a [tone] tone and include a clear call to action.">Professional email</button></div></section>
+    <section class="section muted" id="about"><div class="container about"><p class="eyebrow">About PromptLab AI</p><h2>A polished AI engineering project.</h2><p>PromptLab AI demonstrates a production-minded frontend connected directly to a FastAPI and Gemini workflow.</p></div></section>
+  </main>
+  <footer><div class="container">PromptLab AI · AI Engineering Project</div></footer><div class="toast" id="toast" role="status"></div>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script src="script.js"></script>
+</body></html>

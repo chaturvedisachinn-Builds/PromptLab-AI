@@ -1,8 +1,9 @@
+
 # PromptLab AI 2.0
 
-**An AI-powered prompt engineering workspace built with FastAPI, Google Gemini, and vanilla JavaScript.**
+An AI-powered prompt engineering workspace built with FastAPI, Google Gemini, and vanilla JavaScript.
 
-PromptLab AI 2.0 helps users create, improve, explain, optimize, and evaluate AI prompts through a clean developer-focused interface. It also includes a persistent prompt library with SQLite-based version history.
+PromptLab AI 2.0 helps users create, improve, explain, optimize, and evaluate AI prompts through a developer-focused interface. It also includes a persistent prompt library with SQLite-based version history.
 
 ## Features
 
@@ -38,8 +39,10 @@ PromptLab-AI-2.0/
 │   │   ├── core/
 │   │   ├── db/
 │   │   └── services/
+│   ├── data/
 │   ├── tests/
 │   ├── .env.example
+│   ├── Dockerfile
 │   └── requirements.txt
 ├── frontend/
 │   ├── index.html
@@ -61,8 +64,8 @@ PromptLab-AI-2.0/
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
-cd PromptLab-AI-2.0
+git clone https://github.com/chaturvedisachinn-Builds/PromptLab-AI.git
+cd PromptLab-AI
 ```
 
 ### 2. Set up the backend
@@ -98,11 +101,11 @@ uvicorn app.main:app --reload
 
 Backend API:
 
-`http://127.0.0.1:8000`
+http://127.0.0.1:8000
 
 Interactive API documentation:
 
-`http://127.0.0.1:8000/docs`
+http://127.0.0.1:8000/docs
 
 ### 5. Start the frontend
 
@@ -110,11 +113,11 @@ Open `frontend/index.html` using VS Code Live Server.
 
 The frontend typically runs at:
 
-`http://127.0.0.1:5500`
+http://127.0.0.1:5500
 
 The frontend connects to the local backend at:
 
-`http://127.0.0.1:8000/api/v1`
+http://127.0.0.1:8000/api/v1
 
 ## Prompt Library API
 

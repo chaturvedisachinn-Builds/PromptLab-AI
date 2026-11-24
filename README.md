@@ -1,9 +1,8 @@
-
 # PromptLab AI 2.0
 
-An AI-powered prompt engineering workspace built with FastAPI, Google Gemini, and vanilla JavaScript.
+An AI-powered prompt engineering workspace built with **FastAPI, Google Gemini, and Vanilla JavaScript**.
 
-PromptLab AI 2.0 helps users create, improve, explain, optimize, and evaluate AI prompts through a developer-focused interface. It also includes a persistent prompt library with SQLite-based version history.
+PromptLab AI 2.0 helps users generate, improve, explain, optimize, and evaluate AI prompts through a developer-focused interface. It also provides a persistent prompt library with SQLite-based storage and automatic version history.
 
 ## Features
 
@@ -11,11 +10,12 @@ PromptLab AI 2.0 helps users create, improve, explain, optimize, and evaluate AI
 - **Prompt Improvement:** Refine prompts for better clarity, structure, and results.
 - **Prompt Explanation:** Understand the purpose and structure of a prompt.
 - **Prompt Optimization:** Optimize prompts for more effective AI interactions.
-- **Prompt Evaluation:** Evaluate prompts across clarity, specificity, context, and structure, with scores and improvement suggestions.
+- **Prompt Evaluation:** Evaluate prompts based on clarity, specificity, context, and structure, with scores and improvement suggestions.
 - **Prompt Library:** Save and manage named prompts.
 - **Version History:** Automatically create numbered versions when saving prompts under the same name.
 - **Persistent Storage:** Store prompts locally using SQLite.
 - **REST API:** FastAPI endpoints with request IDs and health monitoring.
+- **API Documentation:** Interactive API documentation through Swagger UI.
 
 ## Technology Stack
 
@@ -32,7 +32,7 @@ PromptLab AI 2.0 helps users create, improve, explain, optimize, and evaluate AI
 ## Project Structure
 
 ```text
-PromptLab-AI-2.0/
+PromptLab-AI/
 ├── backend/
 │   ├── app/
 │   │   ├── api/
@@ -57,9 +57,10 @@ PromptLab-AI-2.0/
 
 ### Prerequisites
 
-- Python 3.10 or later (use a version supported by the project dependencies).
-- A Google Gemini API key for AI-powered features.
-- VS Code with the Live Server extension.
+- Python 3.10 or later, compatible with the project dependencies.
+- Google Gemini API key.
+- Visual Studio Code.
+- VS Code Live Server extension.
 
 ### 1. Clone the repository
 
@@ -79,49 +80,51 @@ python -m pip install -r requirements.txt
 
 ### 3. Configure environment variables
 
+Create your local environment file:
+
 ```powershell
 Copy-Item .env.example .env
 ```
 
-Open `backend/.env` and add your Gemini API key:
+Open `backend/.env` and configure your Gemini API key:
 
 ```env
 GEMINI_API_KEY=your_api_key_here
 ```
 
-Never commit your actual `.env` file or API key.
+Keep your actual API key private. Never commit your `.env` file to GitHub.
 
 ### 4. Start the backend
 
-From the `backend` directory:
+Make sure you are inside the `backend` directory:
 
 ```powershell
 uvicorn app.main:app --reload
 ```
 
-Backend API:
+Backend:
 
-http://127.0.0.1:8000
+`http://127.0.0.1:8000`
 
 Interactive API documentation:
 
-http://127.0.0.1:8000/docs
+`http://127.0.0.1:8000/docs`
 
 ### 5. Start the frontend
 
-Open `frontend/index.html` using VS Code Live Server.
+Open `frontend/index.html` using the VS Code Live Server extension.
 
 The frontend typically runs at:
 
-http://127.0.0.1:5500
+`http://127.0.0.1:5500`
 
-The frontend connects to the local backend at:
+The frontend communicates with the local backend through:
 
-http://127.0.0.1:8000/api/v1
+`http://127.0.0.1:8000/api/v1`
 
 ## Prompt Library API
 
-The prompt library supports persistent storage and version history.
+The prompt library supports persistent storage and automatic version history.
 
 | Method | Endpoint | Purpose |
 |---|---|---|
@@ -129,7 +132,7 @@ The prompt library supports persistent storage and version history.
 | GET | `/api/v1/prompts` | Retrieve saved prompts |
 | GET | `/api/v1/prompts/{prompt_id}/versions` | Retrieve prompt version history |
 
-Example request:
+### Example Request
 
 ```json
 {
@@ -142,13 +145,15 @@ Saving another prompt with the same name creates the next numbered version.
 
 ## Testing
 
-From the `backend` directory:
+Run the following commands from the `backend` directory.
+
+Run tests:
 
 ```powershell
 python -m pytest
 ```
 
-Check installed dependencies:
+Check dependency consistency:
 
 ```powershell
 python -m pip check
@@ -156,15 +161,15 @@ python -m pip check
 
 ## Database
 
-The application uses SQLite for local prompt storage.
+PromptLab AI 2.0 uses SQLite for local prompt storage.
 
 Default database location:
 
 `backend/data/promptlab.db`
 
-The database persists saved prompts and their version history across backend restarts.
+The database stores saved prompts and their version history across backend restarts.
 
-The prompt library does not require a Gemini API call.
+The prompt library operates independently of Gemini API calls.
 
 ## Security
 
@@ -172,16 +177,27 @@ The prompt library does not require a Gemini API call.
 - `.env` files are excluded through `.gitignore`.
 - `.env.example` contains configuration placeholders only.
 - Local database files and virtual environments are excluded from Git.
-- Never expose or commit API credentials.
+- API credentials should never be committed to the repository.
 
-## Cost
+## Cost and Usage
 
-The application and its local development stack use free, open-source technologies. Gemini API usage is subject to Google's current free-tier quotas, availability, and pricing.
+The application can be developed and run locally without separate paid hosting.
+
+Google Gemini API usage is subject to Google's current quotas, availability, and pricing.
 
 ## Project Status
 
 **Version 2.0 — Core features implemented.**
 
-The current milestone includes AI-powered prompt operations, prompt evaluation, persistent prompt storage, and automatic version history.
+The current version includes AI-powered prompt operations, prompt evaluation, persistent prompt storage, and automatic version history.
 
-Future development can include prompt comparison, expanded automated testing, and additional evaluation capabilities.
+### Future Improvements
+
+- Prompt comparison.
+- Expanded automated testing.
+- Additional prompt evaluation capabilities.
+- Further improvements to the user interface.
+
+---
+
+**Built as a hands-on project exploring Generative AI, prompt engineering, Python backend development, and API integration.**
